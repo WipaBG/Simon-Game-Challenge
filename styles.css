@@ -6,15 +6,14 @@ body {
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
-  margin:  5%;
+  margin: 5%;
   color: #FEF2BF;
 }
 
 .container {
-  display: block;
-  width: 50%;
+  max-width: 600px; /* Max width for larger screens */
+  width: 80%; /* Adjusts width on smaller screens */
   margin: auto;
-
 }
 
 .btn {
@@ -24,6 +23,12 @@ body {
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+  transition: transform 0.1s; /* Smooth transition for hover effect */
+}
+
+.btn:hover {
+  cursor: pointer; /* Change cursor to pointer */
+  transform: scale(1.05); /* Slightly increase size on hover */
 }
 
 .game-over {
@@ -50,4 +55,5 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+  opacity: 0.5; /* Slightly fade button when pressed */
 }

@@ -1,3 +1,4 @@
+
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
@@ -6,7 +7,9 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-$(document).on("keypress touchstart", function() {
+
+//The game works with keypresses
+$(document).keypress(function() {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();
@@ -14,35 +17,57 @@ $(document).on("keypress touchstart", function() {
   }
 });
 
-$(".btn").on("click touchstart", function() {
+$(".btn").click(function() {
+
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
 
   playSound(userChosenColour);
   animatePress(userChosenColour);
 
-  checkAnswer(userClickedPattern.length - 1);
+  checkAnswer(userClickedPattern.length-1);
 });
 
-function checkAnswer(currentLevel) {
-  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-    if (userClickedPattern.length === gamePattern.length) {
-      setTimeout(function () {
-        nextSequence();
-      }, 1000);
-    }
-  } else {
-    playSound("wrong");
-    $("body").addClass("game-over");
-    $("#level-title").text("Game Over, Press Any Key or Tap to Restart");
-
-    setTimeout(function () {
-      $("body").removeClass("game-over");
-    }, 200);
-
-    startOver();
+//Make this section work with touchscreen
+$(document).on('touchstart', function() {
+  if (!started) {
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    started = true;
   }
+});
+
+$(".btn").on('touchstart', function() {
+
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+
+  playSound(userChosenColour);
+  animatePress(userChosenColour);
+
+  checkAnswer(userClickedPattern.length-1);
+});
+function checkAnswer(currentLevel) {
+
+    if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+      if (userClickedPattern.length === gamePattern.length){
+        setTimeout(function () {
+          nextSequence();
+        }, 1000);
+      }
+    } else {
+      playSound("wrong");
+      $("body").addClass("game-over");
+      $("#level-title").text("Game Over, Press Any Key to Restart");
+
+      setTimeout(function () {
+        $("body").removeClass("game-over");
+      }, 200);
+
+      startOver();
+    }
 }
+
 
 function nextSequence() {
   userClickedPattern = [];
@@ -73,3 +98,4 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
