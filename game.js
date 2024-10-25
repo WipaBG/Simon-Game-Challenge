@@ -9,12 +9,15 @@ var level = 0;
 
 
 //The game works with keypresses
-$(document).keypress(function() {
-  if (!started) {
-    $("#level-title").text("Level " + level);
-    nextSequence();
-    started = true;
-  }
+$(".start").click(function() {
+  setTimeout(function(){
+    if (!started) {
+      nextSequence();
+      started = true;
+      $("#level-title").text("Level " + level);
+    }  
+  },1000)
+  
 });
 
 $(".btn").click(function() {
@@ -29,7 +32,7 @@ $(".btn").click(function() {
 });
 
 //Make this section work with touchscreen
-$(document).on('touchstart', function() {
+$(".start").on('touchstart', function() {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();

@@ -52,6 +52,21 @@ body {
   background-color: yellow;
 }
 
+.game.start{
+  background-color: rgb(62, 198, 198);
+  width: 400px;
+  margin: 25px;
+  display: inline-block;
+  height: 200px;
+  border: 10px solid black;
+  border-radius: 20%;
+  transition: transform 0.1s;
+}
+.game:hover{
+  cursor: pointer; /* Change cursor to pointer */
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
